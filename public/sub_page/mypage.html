@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="../img/calmcalm_logo.png">
+
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+
+        @font-face {
+            font-family: 'PyeongChangPeace-Bold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'pretendard';
+        }
+
+        body {
+            font-family: 'pretendard';
+            /* background-color: #1C1A1A; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            /* background-color: #f4f4fd; */
+            height: auto;
+        }
+
+        header {
+            height: 50px;
+            background-color: #1C1A1A;
+            text-align: center;
+        }
+        .logo {
+            width: 90px;
+            height: 35px;
+            margin-top: 11px;
+        }
+
+        #header h1 {
+            margin-top: 3px;
+            font-family: 'PyeongChangPeace-Bold';
+            font-size: 22px;
+            color: #7471FF;
+        }
+
+        #header img {
+            margin-top: 5px;
+            width: 23px;
+            margin-right: 5px;
+        }
+
+        #fullpage {
+            margin: 0 auto;
+            width: 100%;
+            background-color: #464646;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 500px;
+        }
+
+        .tab-container {
+            width: 100%;
+            margin: 20px auto;
+            /* background-image: url(../img/back1.png) no-repeat center; */
+            /* background-color: #ffffff; */
+            height: 600px;
+            overflow-y: scroll;
+        }
+
+        .tab-menu {
+            display: flex;
+            background-color: #1C1A1A;
+            color: white;
+            padding: 14px 20px;
+            text-align: center;
+            transition: background-color 0.3s;
+            border-radius: 10px;
+            border: none;
+            font-size: 20px;
+        }
+
+        .tab-link {
+            background-color: none;
+            border: none;
+            outline: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+        .tab-content {
+            /* display: none; */
+            /* padding: 30px; */
+            border-top: none;
+            border-radius: 5px;
+            margin-bottom: -100px;
+        }
+        #content {
+            margin: 0 auto;
+            padding: 10px;
+            width: 90%;
+        }
+
+        .content {
+            margin: 20px auto;
+            /* border: 1px solid rgb(120, 120, 219); */
+            border-radius: 10px;
+            padding: 20px;
+            width: 85%;
+            cursor: pointer;
+            color: rgb(39, 39, 39);
+            line-height: 1.5;
+            opacity: 0.8;
+            background-color: #ececec;
+            font-weight: 600;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        #banner {
+            font-size: 40px;
+            text-align: center;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        #quit {
+            padding: 15px;
+            width: 100%;
+            background-color: #1C1A1A;
+            border: white 1px solid;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header onclick="location.href='../../index.html'">
+            <img src="../img/main_calmcalm_logo.png" alt="Logo" class="logo">
+        </header>
+        <div id="fullpage">
+            <div id="content">
+                <div class="tab-menu">
+                    나의 일기장
+                </div>
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div class="content">
+                            <h3>일기1</h3>
+                            <p>제목 : 직장</p>
+                            <p>날짜 : 2024.04.23</p>
+                        </div>
+                        <div class="content">
+                            <h3>일기2</h3>
+                            <p>제목 : 졸업식</p>
+                            <p>날짜 : 2024.04.24</p>
+                        </div>
+                        <div class="content">
+                            <h3>일기3</h3>
+                            <p>제목 : 수료</p>
+                            <p>날짜 : 2024.04.25</p>
+                        </div>
+                        <div class="content">
+                            <h3>일기4</h3>
+                            <p>제목 : 면접</p>
+                            <p>날짜 : 2024.04.26</p>
+                        </div>
+                        <div class="content">
+                            <h3>일기5</h3>
+                            <p>제목 : 정장</p>
+                            <p>날짜 : 2024.04.27</p>
+                        </div>
+                    </div>
+
+                </div>
+                <button id="quit">
+                    탈퇴하기
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    async function handleWithdraw() {
+        try {
+            const response = await fetch('/user/withdraw', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: localStorage.getItem('user_email') })
+            });
+
+            if (!response.ok) {
+                throw new Error('탈퇴 실패');
+            }
+
+            const data = await response.json();
+            alert(data.message);
+            // 로그아웃 처리
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('user_email');
+            window.location.replace('../../index.html'); // 로그아웃 후 메인 페이지로 이동
+
+        } catch (error) {
+            console.error('탈퇴 요청 중 오류 발생:', error);
+            alert('탈퇴 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+    }
+
+    const userEmail = localStorage.getItem('user_email'); // 로그인 시 저장된 이메일
+    const email = userEmail.replace('@','%40')
+    const quit =  document.getElementById('quit')
+    quit.onclick = handleWithdraw
+
+    const diary_list = document.querySelector('.tab-content')
+    diary_list.replaceChildren()
+    async function diary_load(){
+        try{
+        const response = await fetch(`/diaries/email/${email}`)
+        const data = await response.json()
+        for(i=0;i<data.length;i++){
+            console.log(data[i])
+            const btn = document.createElement('div')
+            const date = data[i].createdat.split('T')[0]
+            btn.className = 'content'
+            btn.innerHTML += `
+                <p class="ids" style="display:none;">${data[i].id}</p>
+                <p> ${date.split('-')[0]}.${date.split('-')[1]}.${date.split('-')[2]}</p>
+                <p style="font-size:14px;"> ${data[i].ment}</p>
+            `
+            btn.addEventListener('click', async function() {
+            // 클릭한 버튼의 첫 번째 자식 노드를 가져옵니다.
+            const diary_id = this.querySelector('.ids').innerHTML
+            console.log(diary_id)
+            const response = await fetch(`/diaries/id/${diary_id}`)
+            const one_diary = await response.json()
+            const diary = JSON.stringify(one_diary);
+            console.log(diary)
+            localStorage.setItem('diary', diary);
+            location.href='./one_diary.html'
+        })
+            diary_list.appendChild(btn)
+        }
+        }catch{
+            alert('일기장 불러오기를 실패했습니다')
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', diary_load);
+
+</script>
+
+</html>

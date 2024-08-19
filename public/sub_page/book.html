@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리딩북</title>
+     <!--아이콘-->
+     <link rel="icon" type="image/png" href="../img/calmcalm_logo.png">
+
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+            font-family: 'pretendard';
+        }
+        body {
+            margin: 0;
+            font-family: 'pretandard', sans-serif;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            height: 50px;
+            background-color: #1C1A1A;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 75px;
+            height: 30px;
+            /* margin-top: 11px; */
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            /* height: calc(100vh - 50px); */
+            /* background-size: cover;
+            background-position: center; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* margin-top: 20%; */
+            /* z-index: 1; */
+            /* padding: 20px; */
+        }
+
+        #backgroundContainer {
+            display: none;
+            width: 100%;
+            height: 500px;
+            background-size: contain;
+            background-position: center;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .play-button {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .play-button img {
+            width: 50px;
+            height: 50px;
+        }
+
+        #upload-form {
+            width: 70%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgb(42, 2, 61);
+            border: 2px solid #6f19c0;
+            border-radius: 24px;
+            text-align: center;
+            padding: 20px;
+            z-index: 2;
+            position: relative;
+            margin-top: 50%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2e2e2e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* input[type="file"] {
+            margin-bottom: 20px;
+            padding-left: 17%;
+        } */
+        #fileInput {
+            display: none; /* 파일 입력 숨기기 */
+        }
+
+        .upload-label {
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .upload-label img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .uploadbtn {
+            background: #8820ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #7A64C7;
+        }
+        .text {
+            font-size: 15px;
+            color: #585858;
+            margin-bottom: 20px;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: green;
+        }
+
+        #audioContainer {
+            display: none; /* 처음에는 보이지 않도록 설정 */
+            background-color: #D8D8D8;
+            /* border-radius: 20px; */
+            width: 100%;
+            position: relative;
+            /* margin-top: 600px; */
+            /* padding: 5px; */
+        }
+        #audioPlayer {
+            width: 90%;
+            padding: 10px;
+            margin-left: 9px;
+            border-radius: 20px;
+        }
+        /* 로딩 애니매이션 */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none; /* 처음에는 숨김 */
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+        .music-loading {
+            position: relative;
+            margin: 60px auto;
+            text-align: center;
+        }
+        .music-loading span {
+            display: inline-block;
+            width: 5px;
+            height: 30px;
+            background-color: #929292;
+            margin: 0.5px;
+            transform-origin: bottom;
+            transform: scaleY(0);
+            animation: anim-music 0.7s linear infinite;
+        }
+        .music-loading span:nth-of-type(1) {
+            animation-delay: 0.1s;
+        }
+        .music-loading span:nth-of-type(2) {
+            animation-delay: 0.2s;
+        }
+        .music-loading span:nth-of-type(3) {
+            animation-delay: 0.3s;
+        }
+        .music-loading span:nth-of-type(4) {
+            animation-delay: 0.4s;
+        }
+        .music-loading span:nth-of-type(5) {
+            animation-delay: 0.5s;
+        }
+        @keyframes anim-music {
+            0%,
+            100% {
+                transform: scaleY(0);
+            }
+            65% {
+                transform: scaleY(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header onclick="location.href='../../index.html'">
+        <img src="../img/main_calmcalm_logo.png" alt="Logo" class="logo">
+    </header>
+    <div class="container">
+        <div id="backgroundContainer"></div>
+        <div id="upload-form">
+            <h1>책 업로드</h1>
+            <form id="uploadForm">
+                <label for="fileInput" class="upload-label">
+                    <img src="../img/upload-arrow4.png" alt="파일 업로드"> <p class="text">PDF 형식으로 올려주세요</p>
+                </label>
+                <input type="file" id="fileInput" name="file" accept="application/pdf">
+                <button class="uploadbtn" type="submit">업로드</button>
+            </form>
+        </div>
+        <div id="message"></div>
+    </div>
+    <div id="audioContainer">
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" type="audio/mpeg">
+        </audio>
+    </div>
+    <!-- 로딩 애니메이션 요소 추가 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="music-loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</body>
+<script>
+document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert('파일을 선택하세요.');
+        return;
+    }
+
+    // 로딩 애니메이션 표시
+    document.getElementById('loadingOverlay').style.display = 'flex';
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            document.getElementById('message').innerText = '파일 업로드 성공: ' + result.filename;
+
+            // 백그라운드 이미지 설정
+            const backgroundContainer = document.getElementById('backgroundContainer');
+            backgroundContainer.style.backgroundImage = 'url(../img/' + result.image_filename + ')';
+            backgroundContainer.style.display = 'block'; // 배경 컨테이너 표시
+
+            // 업로드 폼과 제목 숨기기
+            document.querySelector('h1').style.display = 'none';
+            document.getElementById('uploadForm').style.display = 'none';
+            document.getElementById('upload-form').style.display = 'none';
+
+            // 오디오 플레이어 설정
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioSource = document.getElementById('audioSource');
+            audioSource.src = '/audio/' + result.audio_filename;
+            audioPlayer.load();
+            document.getElementById('audioContainer').style.display = 'block'; // 오디오 컨테이너 표시
+            document.getElementById('audioPlayer').style.display = 'block'; // 오디오 컨테이너 표시
+
+            // 재생 버튼 클릭 이벤트 리스너 추가
+            document.getElementById('player').addEventListener('click', function() {
+                audioPlayer.play();
+            });
+        } else {
+            document.getElementById('message').innerText = '파일 업로드 실패';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('message').style.display = 'none';
+    } finally {
+        // 로딩 애니메이션 숨기기
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }})
+</script>
+</html>

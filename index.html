@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calmcalm</title>
+
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="./public/img/calmcalm_logo.png">
+
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+
+        @font-face {
+            font-family: 'PyeongChangPeace-Bold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'pretendard';
+        }
+
+        body {
+            background-color: #1C1A1A;
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: #009e90;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #1C1A1A;
+            height: auto;
+        }
+
+        header {
+            height: 50px;
+            background-color: #1C1A1A;
+            text-align: center;
+        }
+
+        .logo {
+            width: 90px;
+            height: 35px;
+            margin-top: 20px;
+        }
+
+        #fullpage {
+            margin: 0 auto;
+            width: 90%;
+            background-color: #1C1A1A;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* 각 섹션 container */
+        .container {
+            margin: 10px auto;
+            height: auto;
+            width: 375px;
+        }
+        /* 소개섹션 */
+        #intro {
+            margin-top: 30px;
+            width: 90%;
+        }
+
+        #intro h3 {
+            font-size: 20px;
+            color: #ffffff;
+        }
+        #intro .hello{
+            margin-bottom: 5px;
+        }
+
+        #intro p {
+            font-size: 14px;
+            color: #808892;
+            line-height: 1.5;
+        }
+
+
+        /* 기능섹션 */
+        #function {
+            margin-top: 15px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #function .button {
+            border: none;
+            outline: none;
+            color: white;
+            padding: 20px;
+            font-size: 1rem;
+            text-align: center;
+            display: flex;
+            border-radius: 12px;
+            cursor: pointer;
+            /* box-shadow: 2px 2px 4px 0px rgb(194, 194, 194); */
+            position: relative;
+        }
+
+        #function .button:hover {
+            transform: scale(1.01);
+        }
+
+        #function .log{
+            line-height: 0.8;
+        } 
+
+        #function .me{
+            line-height: 0.8;
+            width: 100%;
+        } 
+
+        #function h3 {
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        #function .button:nth-child(6) .img6_h3 {
+            /* align-items: end; 
+            justify-content: center;  */
+            position: absolute;
+            top: 75%;
+            left: 40%;
+        }
+        #function .button:nth-child(6) .img6_h6 {
+            /* align-items: end; 
+            justify-content: center;  */
+            position: absolute;
+            bottom: 10%;
+            left: 33%;
+        }
+
+        #function .button:nth-child(1){
+            height: 50px;
+            flex: 0 0 calc(100% - 10px);
+        }
+        #function .button:nth-child(2) {
+            padding: 10px;
+            flex: 0 0 calc(65% - 10px);
+            height: 40px;
+            display: none;  /*로그인되면 나오게*/
+        }
+        #function .button:nth-child(3) {
+            padding: 10px;
+            flex: 0 0 calc(35% - 10px);
+            height: 40px;
+            display: none;  /*로그인되면 나오게*/
+        }
+
+        #function .button:nth-child(4),
+        #function .button:nth-child(5) {
+            height: 100px;
+            flex: 0 0 calc(50% - 10px);
+        }
+
+        #function .button:nth-child(6),
+        #function .button:nth-child(7) {
+            flex: 0 0 calc(100% - 10px);
+            height: 250px;
+        }
+
+        #function .button:nth-child(6){
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+        }
+
+        #function .button:nth-child(1) img{
+            position: absolute;
+            top: 12px;
+            right: 25px;
+            width: 25px;
+            height: 25px;
+            opacity: 0.9;
+        }
+        
+        #function .button:nth-child(4) img{
+            position: absolute;
+            top: 20px;
+            right: 17px;
+            width: 80px;
+            height: 70px;
+        }
+
+        #function .button:nth-child(5) img {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+        }
+        #function .button:nth-child(6) img {
+            position: absolute;
+            top: 35px;
+            right: 165px;
+            width: 125px;
+            height: 130px;
+        }
+
+        #function .button:nth-child(1) {
+            background-color: #A8A6FF;
+        }
+        #function .button:nth-child(2) {
+            background-color: #A8A6FF;
+        }
+        #function .button:nth-child(3) {
+            background-color: #A8A6FF;
+        }
+
+        #function .button:nth-child(4) {
+            background-color: #b399dc;
+        }
+
+        #function .button:nth-child(5) {
+            background-color: #86bfcd;
+        }
+
+        #function .button:nth-child(6) {
+            background-color: #775CFF;
+        }
+
+        #function .button:nth-child(7) {
+            background-color: #88D3CE;
+        }
+
+        /* 홍보섹션 */
+        #advertise {
+            width: 95%;
+            margin: 30px auto;
+        }
+        #advertise .service{
+            margin-bottom: 20px;
+            color: #2e2e2e;
+        }
+
+        .section input[id*="slide"] {
+            display: none;
+        }
+
+        .section .slidewrap {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .section .slidelist {
+            border-radius: 12px;
+            box-shadow: 2px 2px 4px 0px rgb(194, 194, 194);
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section .slidelist>li {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all .5s;
+        }
+
+        .section .slidelist>li>a {
+            display: block;
+            position: relative;
+        }
+
+        .section .slideitem:nth-child(1) .image1 {
+            position: absolute;
+            top: 55px;
+            right: 5px;
+            width: 155px;
+        }
+
+        .section .slideitem:nth-child(2) .image1 {
+            position: absolute;
+            top: 45px;
+            right: 5px;
+            width: 140px;
+        }
+
+        .section .slideitem:nth-child(3) .image1 {
+            position: absolute;
+            top: 35px;
+            right: 50px;
+            width: 140px;
+        }
+
+        .section .slideitem:nth-child(4) .image1 {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            width: 140px;
+        }
+
+        .section .image2 {
+            width: 100%;
+        }
+
+        .section .slideitem:nth-child(1) .image3 {
+            position: absolute;
+            top: 100px;
+            left: 25px;
+            width: 140px;
+        }
+        
+        .section .slideitem:nth-child(2) .image3 {
+            position: absolute;
+            top: 90px;
+            left: 25px;
+            width: 160px;
+        }
+
+
+
+        .section .slidelist .textbox {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1.6;
+        }
+
+        .section .slidelist .textbox h3 {
+            position: absolute;
+            top: -90px;
+            /* 상단 여백 */
+            left: -130px;
+            /* 좌측 여백 */
+            font-size: 17px;
+            color: #5D606B;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+        .section .slidelist .textbox h4 {
+            position: absolute;
+            top: -60px;
+            /* 상단 여백 */
+            left: -130px;
+            /* 좌측 여백 */
+            font-size: 13px;
+            color: #959698;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+        .section .slidelist .word1 {
+            text-align: center;
+            position: absolute;
+            bottom: -55px;
+            left: -115px;
+            font-size: 13px;
+            color: #7471FF;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+
+        .section .slidelist .word2 {
+            text-align: center;
+            position: absolute;
+            top: 5px;
+            left: -125px;
+            font-size: 13px;
+            color: #7471FF;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+        .section .slidelist .word3,
+        .section .slidelist .word4  {
+            text-align: center;
+            position: absolute;
+            bottom: -85px;
+            left: -100px;
+            font-size: 15px;
+            font-weight: 400;
+            color: #7471FF;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+
+        .section input[id="slide01"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(0%);
+        }
+
+        .section input[id="slide02"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(-100%);
+        }
+
+        .section input[id="slide03"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(-200%);
+        }
+
+        .section input[id="slide04"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(-300%);
+        }
+
+        /* input에 체크되면 텍스트 효과 */
+        /* 슬라이드 1 */
+        .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox h3,
+        .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox h4,
+        .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        /* 슬라이드 2 */
+        .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox h3,
+        .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox h4,
+        .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        /* 슬라이드 3 */
+        .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox h3,
+        .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox h4,
+        .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        /* 슬라이드 4 */
+        .section input[id="slide04"]:checked~.slidewrap li:nth-child(4) .textbox h3,
+        .section input[id="slide04"]:checked~.slidewrap li:nth-child(4) .textbox h4,
+        .section input[id="slide04"]:checked~.slidewrap li:nth-child(4) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <img src="./public/img/main_calmcalm_logo.png" alt="Logo" class="logo">
+        </header>
+        <div id="fullpage">
+            <div id="intro" class="container">
+                <div class="text">
+                    <h3 class="hello"></h3>
+                    <h3>하루의 마무리는 캄캄!</h3>
+                    <br>
+                    <p> #그림 일기장 #마음을 다스리는 ASMR <br>
+                        빛나는 하루에 멋진 마무리를!</p>
+                </div>
+            </div>
+
+            <div id="function" class="container">
+                <button class="button 1"  id="button1" onclick="location.href='public/sub_page/login_regist.html'">
+                    <h3 class="log">간편하게 로그인하기</h3>
+                    <img src="./public/img/unlock.png" alt="로그인">
+                </button>
+                <button class="button 2" id="button2" onclick="location.href='public/sub_page/mypage.html'">
+                    <h3 class="me">마이페이지</h3>
+                </button>
+                <button class="button 3" id="logout">
+                    <h3 class="me">로그아웃</h3>
+                </button>
+                <button class="button 4" onclick="location.href='public/sub_page/book.html'">
+                    <h3>리딩북</h3>
+                    <img src="./public/img/book.png" alt="리딩북">
+                </button>
+                <button class="button 5" onclick="location.href='public/sub_page/chat.html'">
+                    <h3>캄캄이</h3>
+                    <img src="./public/img/moon.png" alt="캄캄이">
+                </button>
+                <button class="button 6" onclick="location.href='public/sub_page/diary.html'">
+                    <img src="./public/img/diary_img.png" alt="그림일기장">
+                    <h3 class="img6_h3">그림 일기장</h3><br>
+                    <h6 class="img6_h6">하루의 마지막을 꾸며보세요!</h6>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 로그아웃 버튼 클릭 시 처리
+    function logout (event) {
+            fetch('/user/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === "Logged out successfully") {
+                        localStorage.removeItem('access_token'); // 저장된 토큰 제거
+                        localStorage.removeItem('user_email'); // 저장된 이메일 제거
+                        alert('로그아웃되었습니다.');
+                        checkLoginStatus(); // 상태 변경
+                        // 로그아웃 후 button1만 보이도록 설정
+                        document.getElementById("button1").style.display = "inline-block";
+                        document.getElementById("button2").style.display = "none";
+                        document.getElementById("logout").style.display = "none";
+                        document.querySelector(".hello").style.display = "none";
+                    } else {
+                        console.error('로그아웃 실패:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('로그아웃 요청 중 오류 발생:', error);
+                });
+    };
+
+    // 로그인 상태 확인 함수
+    function checkLoginStatus() {
+        const token = localStorage.getItem('access_token');
+        const button1 = document.getElementById("button1");
+        const button2 = document.getElementById("button2");
+        const button3 = document.getElementById("logout");
+        const helloMessage = document.querySelector(".hello");
+        const userEmail = localStorage.getItem('user_email'); // 로그인 시 저장된 이메일
+
+        // console.log("token:", token);
+        // console.log("email", userEmail);
+
+        // 버튼 존재 여부를 체크하여 스타일 변경
+        if (button1) {
+            button1.style.display = token ? "none" : "inline-block";
+        }
+        if (button2) {
+            button2.style.display = token ? "inline-block" : "none";
+        }
+        if (button3) {
+            button3.style.display = token ? "inline-block" : "none";
+        }
+
+        // 로그인 상태일 때 h3 요소의 텍스트 변경 및 표시
+        if (token) {
+            if (token && userEmail) {
+                const username = userEmail.split('@')[0];
+                // const usernameSpan = document.createElement('span');
+                const usernameSpan = document.querySelector('.hello')
+                usernameSpan.textContent = `Hi ${username}님`;
+                usernameSpan.style.color = '#FFFFF'; // username 텍스트 색상 변경
+                // helloMessage.appendChild(usernameSpan);
+                helloMessage.style.display = 'block'; // 표시
+            } else {
+                helloMessage.style.display = 'none'; // 숨김
+            }
+        }
+    }
+
+
+    const button3 = document.getElementById("logout");
+    button3.onclick = logout
+
+
+    // 페이지 로드 시 로그인 상태 확인
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     checkLoginStatus(); // 초기 상태 설정
+    // });
+
+    window.onload = checkLoginStatus;
+
+
+</script>
+
+</html>

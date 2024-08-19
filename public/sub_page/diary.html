@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그림일기장</title>
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="../img/calmcalm_logo.png">
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'pretendard';
+        }
+        body {
+            margin: 0;
+            font-family: 'pretandard', sans-serif;
+        }
+
+        header {
+            height: 50px;
+            background-color: #1C1A1A;
+            text-align: center;
+        }
+
+        .logo {
+            width: 90px;
+            height: 35px;
+            margin-top: 20px;
+        }
+
+        main {
+            background-color: #1C1A1A;
+            padding: 5px;
+            /* align-items: center;
+            justify-content: center;
+            text-align: center; */
+        }
+        .warp{
+            background-color: rgb(230, 230, 230);
+            padding: 5px;
+            margin: 20px auto;
+            width: 90%;
+            border-radius: 5px;
+            border: 1px solid rgb(65, 65, 65);
+        }
+
+        .content1{
+            color: #444444;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .diary-input {
+            width: 85%;
+            max-width: 350px;
+            height: 350px;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            font-size: 15px;
+            padding: 20px;
+            outline: none;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgb(187, 187, 187);
+            font-weight: 700;
+            color:rgb(80, 80, 80);
+            line-height: 1.5;
+            margin: 15px auto;
+            margin-left: 5%;
+            /* line-height: 2;
+            background-image: linear-gradient(transparent 95%, gray);
+            background-size: 90% 2em;
+            background-repeat: repeat-y;
+            background-position: center 5em; */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            background-color: #6d04e4;
+            border: 0.5px solid #A8A6FF;
+            padding: 10px 55px;
+            margin: 0 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 2px 2px 5px rgba(185, 185, 185, 0.2);
+        }
+
+
+    </style>
+</head>
+<body>
+    <header onclick="location.href='../../index.html'">
+        <img src="../img/main_calmcalm_logo.png" alt="Logo" class="logo">
+    </header>
+    <main>
+        <div class="warp">
+        <div class="content1">
+            오늘의 일기
+        </div>
+        <div class="content2">
+            <textarea class="diary-input" rows="10"></textarea>
+            <div class="buttons">
+                <button class="cancel">취소</button>
+                <button class="save">완료</button>
+            </div>
+        </div>
+    </div>
+    </main>
+    <script>
+        console.log('1')
+        const userEmail = localStorage.getItem('user_email'); // 로그인 시 저장된 이메일
+        console.log(userEmail)
+        const cancel_ = document.querySelector('.cancel')
+        const save_ = document.querySelector('.save')
+        function back2home(){
+            alert('취소되었습니다')
+            window.location.href='../../index.html'
+        } 
+        cancel_.onclick = back2home
+        async function mk_diary(){
+            let diary = document.querySelector('.diary-input').value 
+            await fetch('/diary/'+diary).then(data => data.json()).then(data => sessionStorage.setItem('datas', JSON.stringify(data))).then(
+                data => window.location.href = `./diary_result.html`
+            );
+        }
+        save_.onclick = mk_diary
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }})
+    </script>
+</body>
+</html>

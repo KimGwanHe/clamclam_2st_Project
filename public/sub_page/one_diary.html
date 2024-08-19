@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일기장</title>
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="../img/calmcalm_logo.png">
+     <!--글씨체-->
+     <link rel="stylesheet" as="style" crossorigin
+     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        *{
+            color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+            font-family: 'pretendard';
+        }
+        body {
+            margin: 0;
+            font-family: 'pretandard', sans-serif;
+            background-color: #1C1A1A;
+        }
+
+        header {
+            height: 50px;
+            background-color: #1C1A1A;
+            text-align: center;
+        }
+
+        .logo {
+            width: 90px;
+            height: 35px;
+            margin-top: 20px;
+        }
+
+        main {
+            margin: 0 auto;
+            background-color: #1C1A1A;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .diary-container {
+            width: 95%;
+            margin-top: 20px;
+        }
+
+        .date {
+            width: 90%;
+            /* border: 1.5px solid #b4b4b4; */
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 20px auto;
+            text-decoration-line: overline;
+            text-align: center;
+        }
+        
+        .ment-container {
+            width: 90%;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            /* border: solid 1px rgb(0, 0, 0); */
+            margin: 20px auto;
+            background-color: #3c0379;
+            box-shadow: 2px 2px 10px rgba(87, 87, 87, 0.2);
+        }
+
+        .ment {
+            padding: 20px;
+            color: #d3d3d3;
+            font-size: small;
+            flex: 1;
+            margin-left: 5px;
+            line-height: 1.2;
+        }
+
+        .line{
+            height: 30px;
+            width: 1px;
+            background-color: white;
+            margin-right: 10px;
+        }
+
+        .music-player img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .image {
+            width: 90%;
+            height: 350px;
+            background-color: #E0E0E0;
+            /* border: 1.5px solid #b4b4b4; */
+            border-radius: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            /* box-shadow: 2px 2px 15px rgba(253, 243, 243, 0.2); */
+        }
+
+        .diary-content {
+            width: 90%;
+            /* border: 1.5px solid #b4b4b4; */
+            border-radius: 10px;
+            padding: 30px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            box-shadow: 2px 2px 15px rgba(253, 243, 243, 0.2);
+            background-color: #f1f1f1;
+            line-height: 2;
+            margin: 20px auto;
+            color: #424242;
+            font-weight: 600;
+            /* line-height: 2;
+            background-image: linear-gradient(transparent 95%, black 95%);
+            background-size: 90% 2em;
+            background-repeat: repeat-y;
+            background-position: center 2em;
+            resize: none;
+            overflow: hidden;
+            outline: none; */
+        }
+
+
+        #image{
+            border-radius: 15px;
+        }
+        #back-btn{
+            background-color: #6d04e4;
+            /* border: 0.5px solid #A8A6FF; */
+            border-radius: 10px;
+            border: #E0E0E0 solid 1px;
+            padding: 15px;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 15px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header onclick="location.href='../../index.html'">
+        <img src="../img/main_calmcalm_logo.png" alt="Logo" class="logo">
+    </header>
+    <main>
+        <div class="diary-container">
+            <div class="date"> </div>
+            <div class="ment-container">
+                <div class="ment">오늘은 {흐린} 날이 었네요.<br>이런 날에는 {재즈} 음악도 들어 보시면 어떨까요?</div>
+                <span class="line"></span><div class="music-player" id="playSoundButton">
+                    <img src="../img/start_music.png" alt="Play">
+                </div>
+                <div id="player" style="width: 0; height: 0; overflow: hidden;"></div>
+            </div>
+            <div class="image">
+                <img id="image" src="" alt="Diary Image" width="100%" height="100%">
+            </div>
+            <div class="diary-content">
+                일기 내용이 이쪽에 들어감.
+            </div>
+            <div id="back-btn">
+                뒤로가기
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    const image_ = document.getElementById('image')
+    const date_ = document.querySelector('.date')
+    const ment_ = document.querySelector('.ment')
+    const content = document.querySelector('.diary-content')
+    const save = document.querySelector('.save')
+    const cancel = document.querySelector('.cancel')
+    const userEmail = localStorage.getItem('user_email'); // 로그인 시 저장된 이메일
+    const email = userEmail.replace('@','%40')
+
+    const data = localStorage.getItem('diary')
+    localStorage.removeItem('diary');
+    const data_ = JSON.parse(data);
+    console.log(data_)
+    const today = data_.createdat
+    const dates = today.split('T')[0]
+    const year = dates.split('-')[0]
+    const month = dates.split('-')[1]
+    const date = dates.split('-')[2]
+
+    const text = data_.content
+    // const weather = data_.weather
+    const asmr = data_.asmr
+    const ment = data_.ment
+    const image = data_.img
+    console.log(text)
+    console.log(typeof(image)) 
+    console.log(image.length)
+
+    image_.src = `data:image/png;base64,${image}`
+    date_.innerHTML = `${year}년 ${month}월 ${date}일`
+    ment_.innerHTML = ment
+    content.innerHTML = text
+    sessionStorage.clear();
+
+    let tag = document.createElement('script');
+    tag.src = "유튜브 API";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let player;
+    const videoId = asmr.split('?')[1].replace('v=','')
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            videoId: videoId, // 여기에 유튜브 비디오 ID를 넣으세요
+            events: {
+            'onReady': onPlayerReady
+            }
+        });
+    }
+    function onPlayerReady(event) {
+            var playButton = document.getElementById('playSoundButton');
+            playButton.addEventListener('click', function() {
+                var playerState = player.getPlayerState();
+                if (playerState === YT.PlayerState.PLAYING || playerState === YT.PlayerState.BUFFERING) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
+                    player.unMute();
+                }
+            });}
+
+    const back_ = document.getElementById('back-btn')        
+    function back(){
+        location.href='./mypage.html'
+    }
+    back_.onclick=back
+        
+</script>
+</html>

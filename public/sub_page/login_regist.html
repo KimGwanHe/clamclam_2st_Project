@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    </head>
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="../img/calmcalm_logo.png">
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+
+    @font-face {
+        font-family: 'PyeongChangPeace-Bold';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'pretendard';
+    }
+
+    
+
+    body {
+        background-color: #343335;
+    }
+
+    a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: #009e90;
+    }
+
+    ul,
+    li {
+        list-style: none;
+    }
+
+    #wrapper {
+        width: 100%;
+        max-width: 430px;
+        margin: 0 auto;
+        background-color: #f4f4fd;
+        height: auto;
+    }
+
+
+    #fullpage {
+        margin: 0 auto;
+        width: 100%;
+        background-color: #1C1A1A;
+        height: 550px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .main {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        /* background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover; */
+        border-radius: 10px;
+    }
+
+    #chk {
+        display: none;
+    }
+
+    .login {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .login h2{
+        font-family: 'PyeongChangPeace-Bold';
+        margin-top: 30px;
+        text-align: center;
+        color: #7471FF;
+        font-size: 2.0em;
+        width: 100%;
+    }
+    .login #icon1{
+        margin-top: 5px;
+        width: 30px;
+        margin-right: 5px ;
+    }
+
+    .login .imgwrap {
+        width: 90%;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .login #icon2 {
+        width: 40%;
+        height: 40%;
+        margin-bottom: 10px;
+    }
+    
+
+    label {
+        color: #ffffff;
+        font-size: 1.5em;
+        justify-content: center;
+        display: flex;
+        margin: 20px auto 0px auto;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .5s ease-in-out;
+    }
+
+    input {
+        width: 60%;
+        height: 10px;
+        background: #e0dede;
+        justify-content: center;
+        display: flex;
+        margin: 20px auto;
+        padding: 12px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .emailbox {
+        width: 67%;
+        height: 10px;
+        margin: 0px auto;
+        margin-bottom: 50px;
+        padding: 12px;
+        justify-content: center;
+        display: flex;
+    }
+
+    input[type="email"][name="email_sign"] {
+        width: 55%;
+        height: 15px;
+        background: #e0dede;
+        margin: 20px auto;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .btn_chk {
+        display: inline-block;
+        margin-left: 10px;
+        width: 35%;
+        height: 38px;
+        padding: 0;
+        justify-content: center;
+        display: block;
+        color: #fff;
+        background: #A8A6FF;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-top: 20px;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        transition: .2s ease-in;
+        cursor: pointer;
+    }
+
+    .match,
+    .message {
+        margin: 0 auto;
+        width: 60%;
+        display: none;
+        color: #7471FF;
+        font-size: 12px;
+        margin-top: -20px;
+        margin-bottom: 10px;
+    }
+
+    .message {
+        color: rgb(145, 145, 145);
+    }
+    .verification-container {
+        margin: 0 auto;
+        width: 67%;
+        display: none; /* 기본적으로 숨김 */
+        margin-top: 20px;
+        text-align: center; 
+    }
+
+    .verification-input {
+        float: left;
+        width: 62%;
+        height: 38px; /* 높이 수정 */
+        background: #e0dede;
+        margin: 0px auto; /* 상단 여백 줄임 */
+        padding: 12px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .btn_complete {
+        float: left;
+        width: 34%;
+        height: 38px; /* 높이 수정 */
+        margin-left: 10px;
+        margin-bottom: 20px;
+        display: inline-block;
+        padding: 0; /* 패딩 0으로 설정 */
+        display: block;
+        color: #fff;
+        background: #A8A6FF;
+        font-size: 0.8em;
+        font-weight: bold;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        transition: .2s ease-in;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    input[type="date"] {
+        width: 60%;
+        height: 10px;
+        background: #e0dede;
+        justify-content: center;
+        display: flex;
+        margin: -20px auto 0 auto ;
+        padding: 12px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .btn_sub {
+        width: 67%;
+        height: 40px;
+        margin: 10px auto;
+        justify-content: center;
+        display: block;
+        color: #fff;
+        background: #A8A6FF;
+        font-size: 1em;
+        font-weight: bold;
+        margin-top: 20px;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        transition: .2s ease-in;
+        cursor: pointer;
+        -webkit-box-shadow: 0 10px 30px 0 rgba(204, 159, 255, 0.4);
+        box-shadow: 0 10px 30px 0 rgba(204, 159, 255, 0.4);
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    button:hover {
+        background: #7471FF;
+    }
+
+    .signup {
+        width: 100%;
+        height: 550px;
+        background: #ffffff;
+        border-radius: 60% / 10%;
+        transform: translateY(-110px);
+        transition: .8s ease-in-out;
+    }
+
+    .signup label {
+        padding-top: 10px;
+        color: #573b8a;
+        transform: scale(.9);
+        margin-bottom: 10px;
+    }
+
+    #chk:checked~.signup {
+        padding-top: 20px;
+        transform: translateY(-500px);
+    }
+
+    #chk:checked~.signup label {
+        transform: scale(1.2);
+    }
+
+    #chk:checked~.login label {
+        transform: scale(.8);
+    }
+    .placeholder {
+        margin-top: -20px;
+        color: #7e7e7e;
+    }
+</style>
+<body>
+    <div id="wrapper">
+        <div id="fullpage">
+            <div class="main">
+                <input type="checkbox" id="chk" aria-hidden="true">
+                <div class="login">
+                    <h2 onclick="location.href='../../index.html'"><img src="../img/main_calmcalm_logo.png" id="icon1" style="width: 90px; height: 35px;"></h2>
+                    <form id="login" action="/user/login" method="post">
+                        <label for="chk" class="login_text" aria-hidden="true">로그인</label>
+                        <div class="imgwrap">
+                        <img src="../img/calmcalm_big_logo.png" id="icon2" alt="Icon" style="width: 140px; height: 130px;"/>
+                    </div>
+                        <input type="email" name="email" id="lg_email" placeholder="이메일" required="">
+                        <input type="password" name="pswd" id="lg_pw" placeholder="비밀번호" required="">
+                        <button type="submit"  class="btn_sub">로그인</button>
+                    </form>
+                </div>
+                <div class="signup">
+                    <form action="/user/regist" method="post" id="register">
+                        <label for="chk" aria-hidden="true"> 회원가입 </label>
+                        <div class="emailbox">
+                            <input id="email" type="email" name="email" placeholder="이메일" required="">
+                            <button class="btn_chk">인증하기</button>
+                        </div>
+                        <!-- 인증번호 입력과 완료 버튼을 추가할 컨테이너 -->
+                        <div class="verification-container" id="verificationContainer">
+                            <input type="text" id="verificationInput" name="auth_num" class="verification-input" placeholder="인증번호 입력" maxlength="4">
+                            <button type="button" class="btn_complete">확인</button>
+                        </div>
+                        <input type="password" id="password" name="password" placeholder="비밀번호" required>
+                        <input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호 확인" required>
+                        <p id="matchMessage" class="match">비밀번호가 일치합니다.</p>
+                        <p id="errorMessage" class="message">비밀번호를 확인해주세요.</p><br>
+                        <input type="date"  id="dateInput" name="birth" onfocus="clearPlaceholder()" onblur="setPlaceholder()" required>
+                        <button class="btn_sub" type="submit">회원가입</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const passwordInput = document.getElementById('password');
+    const passwordCheckInput = document.getElementById('passwordCheck');
+    const matchMessage = document.getElementById('matchMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    let authnumber_ = ''
+    let pw_match = false
+    let dul_mail = false
+
+    // 입력 필드에 포커스가 있을 때 이벤트
+    passwordCheckInput.addEventListener('change', function () {
+        if (passwordInput.value !== passwordCheckInput.value && passwordCheckInput.value !== '') {
+            matchMessage.style.display = 'none'; // 일치 메시지 숨김
+            errorMessage.style.display = 'block'; // 불일치 메시지 표시
+        }
+    });
+
+    // 비밀번호와 확인용 비밀번호 입력이 변경될 때 호출되는 함수
+    function checkPassword() {
+        const password = passwordInput.value;
+        const passwordCheck = passwordCheckInput.value;
+
+        if (password === passwordCheck && password !== '') {
+            matchMessage.style.display = 'block'; // 일치 메시지 표시
+            errorMessage.style.display = 'none'; // 불일치 메시지 숨김
+            pw_match = true
+            console.log(pw_match)
+
+        } else {
+            matchMessage.style.display = 'none'; // 일치 메시지 숨김
+            errorMessage.style.display = 'block'; // 불일치 메시지 표시
+            pw_match = false
+            console.log(pw_match)
+        }
+    }
+
+    // 입력란의 입력이 변경될 때마다 비교 수행
+    passwordInput.addEventListener('input', checkPassword);
+    passwordCheckInput.addEventListener('input', checkPassword);
+</script>
+<script>
+    function authnum(){
+        let num = ''
+        for (let i =0; i<4;i++){
+            let num_ = Math.floor(Math.random() * 10)
+            num += num_
+        }
+        return num
+    }
+
+    async function authmail(){
+        const email_ =  await document.getElementById('email').value
+        console.log(email_)
+        if (email_ !== ''){
+        fetch(`/user/${email_}`).then(response => response.json().then(data => {
+        if(data.exists){
+            console.log(data)
+            const number = authnum()
+            authnumber_ = number
+            fetch(`/user/${email_}/${number}`).then(response => alert('인증메일 전송완료'))
+            document.getElementById('verificationContainer').style.display = 'block';
+            console.log(number)
+        }else{
+            alert('해당 이메일은 존재합니다.')
+            // console.log('해당 이메일이 존재함')
+        }}))
+    }else{
+            alert('이메일을 입력해주세요')
+        }
+    }
+
+    const auth_btn = document.querySelector('.btn_chk')
+    auth_btn.onclick = authmail
+
+    function check_num(){
+        const num1 = document.getElementById('verificationInput').value
+        console.log(num1)
+        console.log(authnumber_)
+        if(authnumber_ == num1){
+            alert('인증번호가 일치합니다')
+            dul_mail = true
+        }else{
+            dul_mail = false
+            alert('인증번호가 일치하지않습니다 다시 시도해주세요.')
+        }
+    }
+
+    const con_btn = document.querySelector('.btn_complete')
+    con_btn.onclick = check_num
+</script>
+<script>
+    function setPlaceholder() {
+        var input = document.getElementById('dateInput');
+        if (input.value === '') {
+            input.classList.add('placeholder');
+            input.type = 'text';
+            input.value = '생년월일';
+        }
+    }
+
+    function clearPlaceholder() {
+        var input = document.getElementById('dateInput');
+        if (input.value === '생년월일') {
+            input.classList.remove('placeholder');
+            input.value = '';
+            input.type = 'date';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', setPlaceholder);
+</script>
+<script>
+    document.getElementById('register').addEventListener('submit', function(event) {
+    event.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+    // 입력 필드 값 가져오기
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('passwordCheck').value;
+    const birthday = document.getElementById('dateInput').value;
+
+    // 유효성 검사
+    if (!email) {
+        alert('이메일 값을 입력해주세요.');
+        return;
+    }
+
+    if(!dul_mail){
+        alert('이메일 중복을 확인해주세요.')
+        return
+    }
+
+    if (!password) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+    }
+
+    if (!pw_match) {
+        alert('비밀번호와 재확인을 맞게 적어주세요');
+        return;
+    }
+
+    if (!birthday) {
+        alert('생년월일을 입력하여주세요.');
+        return;
+    }
+
+    document.getElementById('register').submit();
+});
+</script>
+
+<!-- 로그인 -->
+<script>
+    document.getElementById('login').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('lg_email').value
+    const password = document.getElementById('lg_pw').value
+    
+    try {
+        const response = await fetch('/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const result = await response.json();
+        localStorage.setItem('access_token', result.access_token); // 토큰 저장
+        localStorage.setItem('user_email', email);
+
+        
+        if (response.ok) {
+            alert('로그인에 성공하였습니다.');
+            location.href = '../../index.html';
+        } else {
+            alert('아이디 또는 비밀번호가 일치하는지 확인해주세요.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('아이디 또는 비밀번호가 일치하는지 확인해주세요.');
+    }
+});
+</script>
+</html>
